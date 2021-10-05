@@ -1,24 +1,41 @@
 package edu.gl.tvv.model;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
-@Table(name = "Depot")
+//@Table(name = "Depot")
 public class Depot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToOne(mappedBy = "depotAddress", cascade = CascadeType.PERSIST)
+//    @OneToMany(mappedBy = "train_depotAddress", cascade = CascadeType.PERSIST)
     private Long id;
 
-    @Column(name = "city")
+    //@Column(name = "city")
     private String city;
+
+    @OneToMany(mappedBy = "depotAddress", cascade = CascadeType.PERSIST)
+    private List<Train> trains;
+
+    public void addTrain(Train train) {
+        this.trains.add(train);
+        train.setDepotAddress(this);
+    }
+
+
+    public Depot() {
+    }
+
+//    public Depot(Long id, String city, Train train) {
+//        this.id = id;
+//        this.city = city;
+//        this.train = train;
+//    }
 
     @Override
     public String toString() {
@@ -35,13 +52,13 @@ public class Depot {
 
         Depot depot = (Depot) o;
 
-        if (id != null ? !id.equals(depot.id) : depot.id != null) return false;
+//        if (id != null ? !id.equals(depot.id) : depot.id != null) return false;
         return city != null ? city.equals(depot.city) : depot.city == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = 0;// = id != null ? id.hashCode() : 0;
         result = 31 * result + (city != null ? city.hashCode() : 0);
         return result;
     }

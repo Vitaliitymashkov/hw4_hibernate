@@ -17,6 +17,7 @@ dependencies {
     implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.10.Final'
     implementation 'org.hibernate:hibernate-entitymanager:4.2.6.Final'
     implementation 'org.postgresql:postgresql:42.2.23'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.23'
 }
 
 test {

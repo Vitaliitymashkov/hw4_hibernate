@@ -19,7 +19,16 @@ public class TrainBuilder {
         Carriage carriage4 = new Carriage(2011, 56);
         Carriage carriage5 = new Carriage(2011, 56);
         List<Carriage> carriages = Arrays.asList(carriage1, carriage2, carriage3, carriage4, carriage5);
+
         Depot depot1 = new Depot("Kyiv 1st depot");
-        return new Train(160, 705, depot1, TrainClass.INTERCITY, carriages);
+        Train train = new Train(160, 705, depot1, TrainClass.INTERCITY, carriages);
+
+        train.setDepotAddress(depot1);
+        carriage1.setTrain(train);
+        carriage2.setTrain(train);
+        carriage3.setTrain(train);
+        carriage4.setTrain(train);
+        carriage5.setTrain(train);
+        return train;
     }
 }

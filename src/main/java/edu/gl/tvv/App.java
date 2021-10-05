@@ -6,7 +6,15 @@ import edu.gl.tvv.service.Railways;
 
 public class App {
     public static void main(String[] args) {
-        App.start();
+        App.start2();
+    }
+
+    private static void start2() {
+        try {
+            Railways.createAndSaveTrain2();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void start() {
