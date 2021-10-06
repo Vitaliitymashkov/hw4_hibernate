@@ -13,10 +13,8 @@ import java.util.List;
 public class Depot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @OneToMany(mappedBy = "train_depotAddress", cascade = CascadeType.PERSIST)
     private Long id;
 
-    //@Column(name = "city")
     private String city;
 
     @OneToMany(mappedBy = "depotAddress", cascade = CascadeType.PERSIST)
@@ -30,12 +28,6 @@ public class Depot {
 
     public Depot() {
     }
-
-//    public Depot(Long id, String city, Train train) {
-//        this.id = id;
-//        this.city = city;
-//        this.train = train;
-//    }
 
     @Override
     public String toString() {
@@ -52,13 +44,12 @@ public class Depot {
 
         Depot depot = (Depot) o;
 
-//        if (id != null ? !id.equals(depot.id) : depot.id != null) return false;
         return city != null ? city.equals(depot.city) : depot.city == null;
     }
 
     @Override
     public int hashCode() {
-        int result = 0;// = id != null ? id.hashCode() : 0;
+        int result = 0;
         result = 31 * result + (city != null ? city.hashCode() : 0);
         return result;
     }

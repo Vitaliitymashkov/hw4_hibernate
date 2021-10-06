@@ -1,41 +1,32 @@
 package edu.gl.tvv.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
-//@Table(name = "Carriage")
 public class Carriage {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@OneToOne
-    //@JoinColumn(name = "carriages")
-    private UUID serialNumber; //UUID
+    @GeneratedValue//(strategy = GenerationType.IDENTITY)
+    private UUID serialNumber;
 
-    //@Column(name = "releaseYear")
     private Integer releaseYear;
 
-    //@Column(name = "paxCapacity")
     private Integer paxCapacity;
 
-    //@ManyToOne
-    //@JoinColumn(name = "train_id")
+    @ManyToOne
+    @JoinColumn(name = "train_id")
     Train train;
 
     public Carriage() {
     }
 
     public Carriage(Integer releaseYear, Integer paxCapacity) {
-//        this.serialNumber = serialNumber;
         this.releaseYear = releaseYear;
         this.paxCapacity = paxCapacity;
     }
@@ -79,8 +70,6 @@ public class Carriage {
 
         Carriage carriage = (Carriage) o;
 
-//        if (serialNumber != null ? !serialNumber.equals(carriage.serialNumber) : carriage.serialNumber != null)
-//            return false;
         if (releaseYear != null ? !releaseYear.equals(carriage.releaseYear) : carriage.releaseYear != null)
             return false;
         return paxCapacity != null ? paxCapacity.equals(carriage.paxCapacity) : carriage.paxCapacity == null;
@@ -88,7 +77,7 @@ public class Carriage {
 
     @Override
     public int hashCode() {
-        int result = 0; // serialNumber != null ? serialNumber.hashCode() : 0;
+        int result = 0;
         result = 31 * result + (releaseYear != null ? releaseYear.hashCode() : 0);
         result = 31 * result + (paxCapacity != null ? paxCapacity.hashCode() : 0);
         return result;

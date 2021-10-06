@@ -39,3 +39,7 @@ To enter PostgreSQL and database use
 
     psql --username=glpguser --dbname=hometask
 
+2. Enjoy the result
+
+
+      TRAIN: 705, intercity, 160 km/h, Depot{id=4, city='Kyiv 1st depot'}, Carriages: {Release year - 2011, Max pax - 80}{Release year - 2011, Max pax - 80}{Release year - 2011, Max pax - 80}{Release year - 2011, Max pax - 56}{Release year - 2011, Max pax - 56}

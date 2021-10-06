@@ -11,22 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
-/*
- route number,
- class (intercity, night, etc.),
- max speed,
- depot address, and
- list of carriages that included to train
-
-Depot address has attributes: city, serial number
-One train could be associated only with one depot
-* */
 @Entity
-//@Table(name = "Train")
 public class Train {
 
     @Id
@@ -39,22 +27,21 @@ public class Train {
     @Column(name = "routeNumber")
     private Integer routeNumber;
 
-//    @ManyToOne
-//    @JoinColumn(name = "depot_id")
-    //(mappedBy = "id", cascade = CascadeType.PERSIST)
-//    @Column(name = "depotAddress")
+    @ManyToOne
+    @JoinColumn(name = "depot_id")
     private Depot depotAddress;
 
     @Enumerated(EnumType.STRING)
-    //@Column//(name = "trainClass")
     private TrainClass trainClass;
 
-    @OneToMany(mappedBy = "serialNumber", cascade = CascadeType.PERSIST)
-    //@Column//(name = "carriages")
-    List<Carriage> carriages;
+    @OneToMany(mappedBy = "train", cascade = CascadeType.PERSIST)
+    List<Carriage> carriages = new ArrayList<>();
+    ;
+
+    public Train() {
+    }
 
     public Train(Integer maxSpeed, Integer routeNumber, Depot depotAddress, TrainClass trainClass, List<Carriage> carriages) {
-//        this.id = id;
         this.maxSpeed = maxSpeed;
         this.routeNumber = routeNumber;
         this.depotAddress = depotAddress;
@@ -117,7 +104,6 @@ public class Train {
 
         Train train = (Train) o;
 
-//        if (id != null ? !id.equals(train.id) : train.id != null) return false;
         if (maxSpeed != null ? !maxSpeed.equals(train.maxSpeed) : train.maxSpeed != null) return false;
         if (routeNumber != null ? !routeNumber.equals(train.routeNumber) : train.routeNumber != null) return false;
         if (depotAddress != null ? !depotAddress.equals(train.depotAddress) : train.depotAddress != null) return false;
@@ -140,7 +126,6 @@ public class Train {
     @Override
     public int hashCode() {
         int result = 0;
-//        result = id != null ? id.hashCode() : 0;
         result = 31 * result + (maxSpeed != null ? maxSpeed.hashCode() : 0);
         result = 31 * result + (routeNumber != null ? routeNumber.hashCode() : 0);
         result = 31 * result + (depotAddress != null ? depotAddress.hashCode() : 0);
